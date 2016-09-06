@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="angular.min.js"></script>
+    <title></title>
+</head>
+<body>
+<div ng-app="myApp">
+    <div ng-controller="firstController">
+        <p>在输入框中尝试输入：</p>
+        <p>姓名：<input type="text" ng-model="firstName"></p>
+        {{firstName|uppercase}}
+        {{lastName}}
+
+    </div>
+
+    <div ng-controller="scondController">
+        {{person[0].name}}
+        {{person[0].age}}
+        <ul>
+            <li ng-repeat="p in person">
+                姓名：{{p.name}}
+                年龄：{{p.age}}
+            </li>
+        </ul>
+
+        <p>循环对象:</p>
+        <ul>
+            <li ng-repeat="x in names| orderBy:'country'">
+                {{x.name + ','+ x.country}}
+            </li>
+        </ul>
+
+        <p>输入过滤:</p>
+        <p><input type="text" ng-model="name"></p>
+        <nl>
+            <li ng-repeat="x in names|filter:name|orderBy:'country'">
+                {{(x.name | uppercase) + ',' + x.country}}
+            </li>
+        </nl>
+
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    var app = angular.module("myApp",[]);
+    app.controller('firstController',function($scope)
+    {
+       $scope.firstName = "张三";
+       $scope.lastName  = "李四";
+    });
+
+    app.controller('scondController',function($scope)
+    {
+        $scope.person = [
+            {name:'张三',age:'15'},
+            {name:'李四',age:'25'},
+            {name:'王五',age:'35'}
+        ];
+
+        $scope.names = [
+            {name:'Jun',country:'Norway'},
+            {name:'Germe',country:'Sweden'},
+            {name:'kui',country:'china'}
+        ];
+    });
+
+
+</script>
+</html>
